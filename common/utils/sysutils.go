@@ -13,6 +13,7 @@ import (
 var (
 	IMG_SUFFIXS   = []string{".jpg", ".bmp", ".jpeg", ".png", ".gif"}
 	VIDEO_SUFFIXS = []string{".avi", ".rmvb", ".rm", ".asf", ".divx", ".mpg", ".mpeg", ".mpe", ".wmv", ".mp4", ".mkv", ".vob", ".h264"}
+	TXT_SUFFIXS = []string{".txt"}
 )
 
 // return all images under basepath
@@ -38,7 +39,7 @@ func listFile(basepath string, suffixs []string) (result []string) {
 		filepath := basepath + "/" + file.Name()
 
 		if file.IsDir() {
-			listFile(filepath, suffixs)
+			result = append(result, listFile(filepath, suffixs)...)
 		} else {
 			if suffixs == nil || StrInSliceIgnoreCase(path.Ext(filepath), suffixs) {
 
@@ -61,7 +62,7 @@ func ListFileFromTime(basepath string, suffixs []string, modtime int64) (result 
 		filepath := basepath + "/" + file.Name()
 
 		if file.IsDir() {
-			listFile(filepath, suffixs)
+			result = append(result, listFile(filepath, suffixs)...)
 		} else {
 			if suffixs == nil || StrInSliceIgnoreCase(path.Ext(filepath), suffixs) {
 

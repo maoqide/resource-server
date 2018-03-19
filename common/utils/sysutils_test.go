@@ -15,7 +15,7 @@ func TestListFileInfo(t *testing.T) {
 
 func TestListFileFromTime(t *testing.T) {
 
-	files := ListFileFromTime("/home/mao/test", nil, 1475118346)
+	files := ListFileFromTime("/home/mao/test", []string{".txt"}, 1475118346)
 
 	t.Logf("files: %v", files)
 }
