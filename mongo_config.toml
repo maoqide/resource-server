@@ -1,0 +1,22 @@
+[product]
+# ip:port. if port is 27017, it can be omitted.
+#if nil, defalut wiil be addrs=["localhost"]
+addrs=["127.0.0.1:27017","192.168.56.102:27017"]
+database="media_pro"
+username="pro"
+password="password"
+timeout=5
+
+[test]
+addrs=[]
+database="media_test"
+username=""
+password=""
+timeout=5
+
+[dev]
+addrs=["127.0.0.1:27017","192.168.56.102:27017"]
+database="media_dev"
+username="dev"
+password="password"
+timeout=5
