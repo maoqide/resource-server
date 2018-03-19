@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"mediaserver/common/utils"
-	"mediaserver/entity"
+	"resource-server/common/utils"
+	"resource-server/entity"
 
 	"github.com/BurntSushi/toml"
 	"github.com/Sirupsen/logrus"

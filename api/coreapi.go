@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"mediaserver/entity"
-	"mediaserver/service"
+	"resource-server/entity"
+	"resource-server/service"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/gorilla/mux"

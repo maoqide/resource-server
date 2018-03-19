@@ -3,8 +3,8 @@ package service
 import (
 	"os"
 
-	"mediaserver/common/mongo"
-	"mediaserver/entity"
+	"resource-server/common/mongo"
+	"resource-server/entity"
 
 	"github.com/Sirupsen/logrus"
 	"gopkg.in/mgo.v2/bson"

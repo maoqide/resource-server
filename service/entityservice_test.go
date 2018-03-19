@@ -3,8 +3,8 @@ package service
 import (
 	"testing"
 
-	"mediaserver/common/mongo"
-	"mediaserver/common/utils"
+	"resource-server/common/mongo"
+	"resource-server/common/utils"
 )
 
 func TestSave2db(t *testing.T) {

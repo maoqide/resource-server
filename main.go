@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"mediaserver/api"
-	"mediaserver/common/mongo"
+	"resource-server/api"
+	"resource-server/common/mongo"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/gorilla/mux"

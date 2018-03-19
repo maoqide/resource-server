@@ -4,9 +4,9 @@ import (
 	"github.com/Sirupsen/logrus"
 	"gopkg.in/mgo.v2/bson"
 
-	//"mediaserver/common/utils"
-	"mediaserver/common/mongo"
-	"mediaserver/entity"
+	//"resource-server/common/utils"
+	"resource-server/common/mongo"
+	"resource-server/entity"
 )
 
 const (

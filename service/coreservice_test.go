@@ -1,7 +1,7 @@
 package service
 
 import (
-	"mediaserver/common/mongo"
+	"resource-server/common/mongo"
 	"testing"
 )
 

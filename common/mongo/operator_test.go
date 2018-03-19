@@ -3,7 +3,7 @@ package mongo
 import (
 	"testing"
 
-	"mediaserver/entity"
+	"resource-server/entity"
 
 	"gopkg.in/mgo.v2/bson"
 )
