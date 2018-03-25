@@ -1,19 +1,21 @@
 package utils
+
 import (
+	"encoding/json"
+	"os"
 	"testing"
 )
 
 func TestWalk(t *testing.T) {
-	rootpath := "D:\\projects"
+	rootpath := "/home/mao/test"
 
-	root := FileNode{"projects", rootpath, []*FileNode{}}
+	root := FileNode{"test", rootpath, true, []*FileNode{}}
 	fileInfo, _ := os.Lstat(rootpath)
 	walk(rootpath, fileInfo, &root)
-	data, _ := json.Marshal(root)
+	// data, _ := json.Marshal(root)
 	data, _ := json.MarshalIndent(root, "", "\t")
-	fmt.Printf("%s", data)
 
-	files := ListFileFromTime("/home/mao/test", []string{".txt"}, 1475118346)
+	// files := ListFileFromTime("/home/mao/test", []string{".txt"}, 1475118346)
 
-	t.Logf("files: %v", files)
+	t.Logf("tree: %s", string(data))
 }

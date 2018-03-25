@@ -1,7 +1,7 @@
 package utils
+
 import (
-	"encoding/json"
-	"fmt"
+	_ "encoding/json"
 	"os"
 	"path/filepath"
 	"sort"
@@ -10,7 +10,7 @@ import (
 type FileNode struct {
 	Name      string      `json:"name"`
 	Path      string      `json:"path"`
-	IsDir     bool	      `json:"isDir"`
+	IsDir     bool        `json:"isDir"`
 	FileNodes []*FileNode `json:"children"`
 }
 
@@ -27,11 +27,13 @@ func walk(path string, info os.FileInfo, node *FileNode) {
 		fio, _ := os.Lstat(fpath)
 
 		// 将当前文件作为子节点添加到目录下
-		child := FileNode{filename, fpath, []*FileNode{}}
-		node.FileNodes = append(node.FileNodes, &child)
-
-		// 如果遍历的当前文件是个目录，则进入该目录进行递归
-		if fio.IsDir() {
+		child := FileNode{filename, fpath, false, []*FileNode{}}
+		if !fio.IsDir() {
+			node.FileNodes = append(node.FileNodes, &child)
+		} else {
+			child.IsDir = true
+			node.FileNodes = append(node.FileNodes, &child)
+			// 如果遍历的当前文件是个目录，则进入该目录进行递归
 			walk(fpath, fio, &child)
 		}
 	}
