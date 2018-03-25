@@ -1,8 +1,10 @@
 package mongo
 
 import (
+	"os"
 	"testing"
 
+	. "resource-server/common/utils"
 	"resource-server/entity"
 
 	"gopkg.in/mgo.v2/bson"
@@ -77,4 +79,16 @@ func TestHandleUpdateOne(t *testing.T) {
 	if err != nil {
 		t.Errorf("failed, err: %v", err)
 	}
+}
+
+// go test -v -run ^TestInsertFileNode$
+func TestInsertFileNode(t *testing.T) {
+	t.Logf("begin")
+
+	Init()
+	rootpath := "/home/mao/test"
+	rootID := bson.NewObjectId()
+	root := entity.FileNodeMgo{rootID, "test", rootpath, true, rootID}
+	fileInfo, _ := os.Lstat(rootpath)
+	WalkDB(rootpath, fileInfo, &root, HandleInsert, "testcoll2")
 }
