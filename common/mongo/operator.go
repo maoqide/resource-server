@@ -302,12 +302,39 @@ func getCollection(collName string, session *mgo.Session) *mgo.Collection {
 	return session.DB(operator.customDB).C(collName)
 }
 
-//get collection, and create an unique index
+//get collection, and create an index
 func getCollectionWithIndex(collName string, session *mgo.Session, key []string) *mgo.Collection {
 
 	collection := session.DB(operator.customDB).C(collName)
-	collection.EnsureIndex(mgo.Index{Key: key, Unique: true})
+	collection.EnsureIndex(mgo.Index{Key: key})
 	return collection
+}
+
+// GetCollection get mongoDB collection, optional EnsureIndex
+func GetCollection(collName string, index []string) (*mgo.Collection, error) {
+
+	//validate global varible 'operator'
+	if !operatorValidate() {
+		logrus.Errorf("operator not injected, must InjectOperator() first.")
+		return nil, errors.New("MONGO.OPERATOR NOT INJECTED")
+	}
+
+	//get mongo session
+	session, existed, err := operator.sessionManager.GetDefault()
+	if err != nil {
+		logrus.Errorf("get mongo session failed, err: %v", err)
+		return nil, err
+	}
+
+	//if already exist one, close when operation completed
+	if existed {
+		defer session.Close()
+	}
+
+	if len(index) > 0 {
+		return getCollectionWithIndex(collName, session, index), nil
+	}
+	return getCollection(collName, session), nil
 }
 
 // validate if operator has been injected.
