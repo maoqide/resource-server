@@ -167,6 +167,8 @@ func HandleUpdateOne(document interface{}, queryStruct QueryStruct) (bool, error
 	return created, nil
 }
 
+// HandleDelete remove records of collection, Removeall if one is false,
+// empty collection if selector is nil and one is false
 func HandleDelete(collName string, selector bson.M, one bool) error {
 
 	// validate global varible 'operator'
@@ -187,10 +189,10 @@ func HandleDelete(collName string, selector bson.M, one bool) error {
 		defer session.Close()
 	}
 
-	if len(selector) == 0 {
-		logrus.Errorf("error handledelete mongo collection [s%], selector is empty", collName)
-		return errors.New("MONGO DELETE COLLECTION FAILED, SELECTOR CANNOT BE EMPTY")
-	}
+	// if len(selector) == 0 {
+	// 	logrus.Errorf("error handledelete mongo collection [s%], selector is empty", collName)
+	// 	return errors.New("MONGO DELETE COLLECTION FAILED, SELECTOR CANNOT BE EMPTY")
+	// }
 
 	// get mongo collection
 	coll := getCollection(collName, session)
@@ -198,10 +200,9 @@ func HandleDelete(collName string, selector bson.M, one bool) error {
 	logrus.Debugf("HandleDelete success, collName: %s, selector: %v, one: %b", collName, selector, one)
 	if one {
 		return coll.Remove(selector)
-	} else {
-		_, err = coll.RemoveAll(selector)
-		return err
 	}
+	_, err = coll.RemoveAll(selector)
+	return err
 
 }
 
