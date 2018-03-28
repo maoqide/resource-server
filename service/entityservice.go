@@ -36,3 +36,17 @@ func save2db(collname string, images []entity.Resource) error {
 	return mongo.HandleInsert(collname, doc...)
 
 }
+
+// Entities2JSON convert []Entity to jsonstr array
+func Entities2JSON(entities []entity.Entity) ([]string, map[string]error) {
+	var result []string
+	var errInfo = make(map[string]error)
+	for _, e := range entities {
+		j, err := e.ToJSON()
+		if err != nil {
+			errInfo[e.ID()] = err
+		}
+		result = append(result, string(j))
+	}
+	return result, errInfo
+}

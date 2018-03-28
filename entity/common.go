@@ -1,8 +1,16 @@
 package entity
 
 import (
+	"encoding/json"
+
 	"gopkg.in/mgo.v2/bson"
 )
+
+// Entity base entity interface
+type Entity interface {
+	ID() string
+	ToJSON() ([]byte, error)
+}
 
 // Resource file, image or video
 type Resource struct {
@@ -30,4 +38,14 @@ type FileNodeMgo struct {
 	Parent   bson.ObjectId `bson:"parent" json:"parent"`
 	// Children []bson.ObjectId `bson:"chindren" json:"children"`
 	// FileNodes []*FileNode     `bson:"nodes" json:"nodes"`
+}
+
+// ToJSON to json, inherit ENTITY
+func (e *FileNodeMgo) ToJSON() ([]byte, error) {
+	return json.Marshal(e)
+}
+
+// ID identification
+func (e *FileNodeMgo) ID() string {
+	return string(e.ObjectID)
 }

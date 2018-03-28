@@ -38,5 +38,16 @@ func TestQueryChild(t *testing.T) {
 		t.Errorf("err: %v", err)
 		t.Fail()
 	}
-	t.Logf("child %v", documents2)
+	t.Logf("child %v len %d", documents2, len(documents2))
+	var entities = make([]entity.Entity, len(documents2))
+	t.Logf(".................. %d", len(entities))
+
+	for i, d := range documents2 {
+		// entities = append(entities, &d)
+		entities[i] = &d
+	}
+
+	t.Logf("entities %v len %d", entities, len(entities))
+	jsonA, _ := Entities2JSON(entities)
+	t.Logf("json %v", jsonA)
 }
