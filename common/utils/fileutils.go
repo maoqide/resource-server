@@ -10,6 +10,9 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// ROOT_PARENT tag root directory parent
+var ROOT_PARENT_ID = bson.ObjectIdHex("000000000000000000000000")
+
 // Walk walk file tree, append FileNode to root
 func Walk(path string, info os.FileInfo, node *entity.FileNode) {
 	// 列出当前目录下的所有目录、文件

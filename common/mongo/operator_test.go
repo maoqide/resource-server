@@ -46,8 +46,8 @@ func TestHandleQueryOne(t *testing.T) {
 	Init()
 	document := &entity.Resource{}
 	var selector = bson.M{}
-	selector[ParamID()] = bson.ObjectIdHex("58f421c0e1382328c2bc7856")
-	err := HandleQueryOne(&document, QueryStruct{"testcoll", selector, 0, 0, ""})
+	selector[ParamID()] = selector["parent"]
+	err := HandleQueryOne(&document, QueryStruct{"testcoll2", selector, 0, 0, "_id"})
 	t.Logf("document: %v", document)
 	if err != nil {
 		t.Errorf("failed, err: %v", err)

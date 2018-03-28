@@ -62,7 +62,7 @@ func dumpFile2DB() {
 	fmt.Println("walk file tree")
 	rootpath := "/home/mao/test"
 	rootID := bson.NewObjectId()
-	root := entity.FileNodeMgo{rootID, "test", rootpath, true, rootID}
+	root := entity.FileNodeMgo{rootID, "test", rootpath, true, utils.ROOT_PARENT_ID}
 	fileInfo, _ := os.Lstat(rootpath)
 	utils.WalkDB(rootpath, fileInfo, &root, mongo.HandleInsert, collName)
 
