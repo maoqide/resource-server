@@ -26,14 +26,14 @@ func TestQueryChild(t *testing.T) {
 	documents := []entity.FileNodeMgo{}
 	cs := GetCoreService()
 	t.Log(cs.collectionName)
-	err := cs.queryRoot(&documents)
+	err := cs.QueryRoot(&documents)
 	if err != nil {
 		t.Errorf("err: %v", err)
 		t.Fail()
 	}
 	t.Logf("root %v", documents)
 	documents2 := []entity.FileNodeMgo{}
-	err = cs.queryChild(&documents2, documents[0].ObjectID)
+	err = cs.QueryChild(&documents2, documents[0].ObjectID)
 	if err != nil {
 		t.Errorf("err: %v", err)
 		t.Fail()

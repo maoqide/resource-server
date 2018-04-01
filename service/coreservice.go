@@ -57,7 +57,8 @@ func ListImages(start, count int) ([]entity.Resource, error) {
 
 }
 
-func (c *CoreService) queryChild(documents interface{}, parent bson.ObjectId) error {
+// QueryChild query child of parent
+func (c *CoreService) QueryChild(documents interface{}, parent bson.ObjectId) error {
 	// documents := []entity.FileNodeMgo{}
 	var selector = bson.M{}
 	selector["parent"] = parent
@@ -68,6 +69,7 @@ func (c *CoreService) queryChild(documents interface{}, parent bson.ObjectId) er
 	return nil
 }
 
-func (c *CoreService) queryRoot(documents interface{}) error {
-	return c.queryChild(documents, utils.ROOT_PARENT_ID)
+// QueryRoot query root
+func (c *CoreService) QueryRoot(documents interface{}) error {
+	return c.QueryChild(documents, utils.ROOT_PARENT_ID)
 }
